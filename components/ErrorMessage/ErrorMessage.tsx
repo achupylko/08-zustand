@@ -1,0 +1,15 @@
+import css from './ErrorMessage.module.css';
+
+interface ErrorMessageProps {
+  message?: string;
+}
+
+export default function ErrorMessage({ message }: ErrorMessageProps) {
+  return (
+    <div className={css.wrapper}>
+      <p className={css.message}>
+        <span>Error:</span> {message || 'Something went wrong'}
+      </p>
+    </div>
+  );
+}
