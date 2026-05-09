@@ -4,11 +4,42 @@ import {
   HydrationBoundary,
   QueryClient,
 } from '@tanstack/react-query';
+import { Metadata } from 'next';
 import NoteDetailsClient from './NoteDetails.client';
 
 type Props = {
   params: Promise<{ id: string }>;
 };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { id } = await params;
+  const note = await getNoteById(id);
+  return {
+    title: note.title,
+    description: `Note: ${note.title}`,
+    openGraph: {
+      title: note.title,
+      description: `Note: ${note.title}`,
+      url: 'https://notehub.com/',
+      siteName: 'NoteHub',
+      images: [
+        {
+          url: 'https://ac.goit.global/fullstack/react/notehub-og-meta.jpg',
+          width: 1200,
+          height: 630,
+          alt: 'NoteHub preview',
+        },
+      ],
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: note.title,
+      description: `Note: ${note.title}`,
+      images: ['https://ac.goit.global/fullstack/react/notehub-og-meta.jpg'],
+    },
+  };
+}
 
 export default async function NoteDetails(props: Props) {
   const { id } = await props.params;
