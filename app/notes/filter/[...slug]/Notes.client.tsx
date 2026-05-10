@@ -19,6 +19,7 @@ type Props = {
 };
 
 function NotesClient({ category }: Props) {
+  const [inputValue, setInputValue] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -32,18 +33,22 @@ function NotesClient({ category }: Props) {
 
   const totalPages = data?.totalPages ?? 0;
 
-  const updateSearchQuery = useDebouncedCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      setSearchQuery(event.target.value);
-      setCurrentPage(1);
-    },
-    300
-  );
+  const updateSearchQuery = useDebouncedCallback((value: string) => {
+    setSearchQuery(value);
+    setCurrentPage(1);
+  }, 300);
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+
+    setInputValue(value);
+    updateSearchQuery(value);
+  };
 
   return (
     <div className={css.app}>
       <header className={css.toolbar}>
-        {<SearchBox value={searchQuery} handleChange={updateSearchQuery} />}
+        {<SearchBox value={searchQuery} handleChange={handleChange} />}
         {isSuccess && totalPages > 1 && (
           <Pagination
             totalPages={totalPages}

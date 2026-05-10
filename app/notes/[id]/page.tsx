@@ -16,11 +16,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const note = await getNoteById(id);
   return {
     title: note.title,
-    description: `Note: ${note.title}`,
+    description: `Note: ${note.content.slice(0, 30)}`,
     openGraph: {
       title: note.title,
-      description: `Note: ${note.title}`,
-      url: 'https://notehub.com/',
+      description: `Note: ${note.content.slice(0, 30)}`,
+      url: `https://notehub.com/notes/${note.id}`,
       siteName: 'NoteHub',
       images: [
         {
@@ -35,7 +35,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     twitter: {
       card: 'summary_large_image',
       title: note.title,
-      description: `Note: ${note.title}`,
+      description: `Note: ${note.content.slice(0, 30)}`,
       images: ['https://ac.goit.global/fullstack/react/notehub-og-meta.jpg'],
     },
   };
