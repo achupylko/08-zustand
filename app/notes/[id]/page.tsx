@@ -15,28 +15,28 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id } = await params;
   const note = await getNoteById(id);
   return {
-    title: note.title,
-    description: `Note: ${note.content.slice(0, 30)}`,
+    title: `Note: ${note.title}`,
+    description: note.content.slice(0, 30),
     openGraph: {
-      title: note.title,
-      description: `Note: ${note.content.slice(0, 30)}`,
+      title: `Note: ${note.title}`,
+      description: note.content.slice(0, 100),
       url: `https://notehub.com/notes/${note.id}`,
       siteName: 'NoteHub',
       images: [
         {
-          url: 'https://ac.goit.global/fullstack/react/notehub-og-meta.jpg',
+          url: 'https://placehold.co/1200x630',
           width: 1200,
           height: 630,
-          alt: 'NoteHub preview',
+          alt: note.title,
         },
       ],
-      type: 'website',
+      type: 'article',
     },
     twitter: {
       card: 'summary_large_image',
-      title: note.title,
-      description: `Note: ${note.content.slice(0, 30)}`,
-      images: ['https://ac.goit.global/fullstack/react/notehub-og-meta.jpg'],
+      title: `${note.title}`,
+      description: note.content.slice(0, 30),
+      images: ['https://ac.goit.global/fullstack/react/og-meta.jpg'],
     },
   };
 }
