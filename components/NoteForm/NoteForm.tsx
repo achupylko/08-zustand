@@ -60,6 +60,8 @@ export default function NoteForm() {
           minLength={3}
           maxLength={50}
           required
+          defaultValue={draft?.title}
+          onChange={handleChange}
         />
       </div>
 
@@ -73,6 +75,8 @@ export default function NoteForm() {
           className={css.textarea}
           maxLength={500}
           required
+          defaultValue={draft?.content}
+          onChange={handleChange}
         />
       </div>
 
@@ -83,7 +87,8 @@ export default function NoteForm() {
           id={`${fieldId}-tag`}
           name="tag"
           className={css.select}
-          defaultValue="Todo"
+          defaultValue={draft?.tag}
+          onChange={handleChange}
         >
           <option value="Meeting">Meeting</option>
           <option value="Personal">Personal</option>
