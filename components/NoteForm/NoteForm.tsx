@@ -1,7 +1,7 @@
 'use client';
 
 import { createNote, NewNote } from '@/lib/api';
-import { useNoteDraftStore } from '@/lib/stores/noteStore';
+import { useNoteDraftStore } from '@/lib/store/noteStore';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import React, { useId } from 'react';
