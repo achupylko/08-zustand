@@ -32,7 +32,7 @@ export const fetchNotes = async (
   return response.data;
 };
 
-interface NewNote {
+export interface NewNote {
   title: string;
   content: string;
   tag: string;
