@@ -48,7 +48,8 @@ function NotesClient({ category }: Props) {
   return (
     <div className={css.app}>
       <header className={css.toolbar}>
-        {<SearchBox value={searchQuery} handleChange={handleChange} />}
+        <SearchBox value={inputValue} handleChange={handleChange} />
+
         {isSuccess && totalPages > 1 && (
           <Pagination
             totalPages={totalPages}
@@ -56,6 +57,7 @@ function NotesClient({ category }: Props) {
             onPageChange={setCurrentPage}
           />
         )}
+
         <Link className={css.button} href="/notes/action/create">
           Create note
         </Link>
